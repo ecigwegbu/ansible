@@ -8,7 +8,7 @@
         stack_name: "uta-ansible-lab"
         state: "present"
         region: "us-east-1"
-        template: "git/aws/cloudformation/uta-ansible-lab.yaml"
+        template: "uta-ansible-lab.yaml"
         template_parameters:
           KeyPairName: "UTAbastionkeys"
           IAMInstanceProfileName: "uta-ansible-lab"
