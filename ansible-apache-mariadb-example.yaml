@@ -1,0 +1,40 @@
+---
+- name: Enable intranet services
+  hosts: servera
+  become: yes
+  tasks:
+    - name: latest version of httpd and firewalld installed
+      dnf:
+        name:
+          - httpd
+          - firewalld
+        state: latest
+    - name: firewalld enabled and running
+      service:
+        name: firewalld
+        enabled: yes
+        state: started
+    - name: firewalld permits http service
+      firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+        immediate: yes
+    - name: httpd enabled and running
+      service:
+        name: httpd
+        enabled: yes
+        state: started
+    - name: test html page is installed
+      copy:
+        content: "Welcome to the example.com intranet!\n"
+        dest: /var/www/html/index.html
+
+- name: Test intranet web server
+  hosts: localhost
+  become: no
+  tasks:
+    - name: connect to intranet web server
+      uri:
+        url: http://www.example.com
+        status_code: 200

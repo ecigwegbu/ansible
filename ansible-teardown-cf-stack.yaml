@@ -1,0 +1,9 @@
+---
+- name: Working with AWS CloudFormation
+  hosts: localhost
+  become: false
+  tasks:
+    - name: create a cloudformation stack
+      amazon.aws.cloudformation:
+        stack_name: "uta-ansible-lab"
+        state: "absent"

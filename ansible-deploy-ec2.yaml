@@ -1,0 +1,17 @@
+---
+- name: Example Playbook to create an AWS EC2 Instance
+  hosts: localhost
+  become: false
+  tasks:
+    - name: start an instance with a public IP address
+      amazon.aws.ec2_instance:
+        name: "public-compute-instance"
+        key_name: "UTAbastionkeys"
+        vpc_subnet_id: subnet-0adb40e205e65fbf9
+        instance_type: t2.micro
+        security_group: sg-0a48b5bfb6f7b525a
+        network:
+          assign_public_ip: true
+        image_id: ami-0fe630eb857a6ec83
+        tags:
+          Environment: Testing

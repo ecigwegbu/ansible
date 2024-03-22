@@ -1,0 +1,9 @@
+---
+- name: Example Playbook to terminate AWS EC2 Instances based on 'Name' tag
+  hosts: localhost
+  become: false
+  tasks:
+    - name: Terminate all instances with the given 'Name' tag
+      amazon.aws.ec2_instance:
+        name: "test-instance"
+        state: absent
